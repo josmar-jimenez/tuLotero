@@ -1,4 +1,4 @@
-package com.tulotero.chispazo.domain;
+package com.tulotero.chispazo.domain.bean;
 
 
 import lombok.Value;

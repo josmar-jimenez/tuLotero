@@ -1,6 +1,6 @@
-package com.tulotero.chispazo.application;
+package com.tulotero.chispazo.usecase;
 
-import com.tulotero.chispazo.domain.ChispazoDraw;
+import com.tulotero.chispazo.domain.bean.ChispazoDraw;
 import com.tulotero.chispazo.domain.ChispazoDrawRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -29,7 +29,7 @@ class ChispazoDrawFinderTest {
     }
 
     @Test
-    public void getDraw_idFound() {
+    public void find_whenIdExists_shouldReturnOptionalOfDraw() {
         ChispazoDraw draw1 = givenDraw(1L);
         ChispazoDraw draw2 = givenDraw(2L);
         doReturn(asList(draw1, draw2)).when(repository).findAll();
@@ -41,7 +41,7 @@ class ChispazoDrawFinderTest {
     }
 
     @Test
-    public void getDraw_idNotFound() {
+    public void find_whenIdNotExists_shouldReturnOptinalEmpty() {
         ChispazoDraw draw1 = givenDraw(1L);
         ChispazoDraw draw2 = givenDraw(2L);
         doReturn(asList(draw1, draw2)).when(repository).findAll();

@@ -1,12 +1,12 @@
-package com.tulotero.chispazo.infraestructure;
+package com.tulotero.chispazo.entrypoint;
 
-import com.tulotero.chispazo.application.ChispazoDrawFinder;
-import com.tulotero.chispazo.application.ChispazoBetPrizeCalculator;
-import com.tulotero.chispazo.domain.ChispazoBet;
-import com.tulotero.chispazo.domain.ChispazoDraw;
-import com.tulotero.chispazo.domain.ChispazoPrizeCheck;
-import com.tulotero.chispazo.domain.PrizeInfo;
-import com.tulotero.chispazo.domain.ScrutinyPrize;
+import com.tulotero.chispazo.usecase.ChispazoDrawFinder;
+import com.tulotero.chispazo.usecase.ChispazoBetPrizeCalculator;
+import com.tulotero.chispazo.domain.bean.ChispazoBet;
+import com.tulotero.chispazo.domain.bean.ChispazoDraw;
+import com.tulotero.chispazo.domain.bean.ChispazoPrizeCheck;
+import com.tulotero.chispazo.domain.bean.PrizeInfo;
+import com.tulotero.chispazo.domain.bean.ScrutinyPrize;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -39,7 +39,7 @@ class ChispazoResourceTest {
     }
 
     @Test
-    public void getGetDrawInfo_shouldReturnOkIfDrawIsFound() throws Exception {
+    public void getDrawInfo_whenExistingDrawId_shouldResponseOK() {
         Long drawId = new Random().nextLong();
         ChispazoDraw draw = givenDraw(drawId);
         when(drawFinder.find(drawId)).thenReturn(Optional.of(draw));
@@ -51,7 +51,7 @@ class ChispazoResourceTest {
     }
 
     @Test
-    public void getGetDrawInfo_shouldNotFoundIfDrawIsNotFound() throws Exception {
+    public void getDrawInfo_whenNotExistingDrawId_shouldResponseNotFound() {
         Long drawId = new Random().nextLong();
         when(drawFinder.find(drawId)).thenReturn(Optional.empty());
 
@@ -61,7 +61,7 @@ class ChispazoResourceTest {
     }
 
     @Test
-    public void calculatePrizeInfo_shouldReturnPrizeOk() throws Exception {
+    public void calculatePrizeInfo_whenCorrectDrawIdAndBet_shouldResponseOK() {
         ChispazoBet bet = givenBet();
         Long drawId = new Random().nextLong();
         ChispazoDraw draw = givenDraw(drawId);
@@ -78,7 +78,7 @@ class ChispazoResourceTest {
     }
 
     @Test
-    public void calculatePrizeInfo_shouldReturnNotFoundIfDrawNotExists() throws Exception {
+    public void calculatePrizeInfo_whenNotExtistingDrawId_shouldResponseNotFound() {
         ChispazoBet bet = givenBet();
         Long drawId = new Random().nextLong();
         when(drawFinder.find(drawId)).thenReturn(Optional.empty());

@@ -1,6 +1,6 @@
-package com.tulotero.chispazo.application;
+package com.tulotero.chispazo.usecase;
 
-import com.tulotero.chispazo.domain.PrizeCalculationDrawInfo;
+import com.tulotero.chispazo.domain.bean.PrizeCalculationDrawInfo;
 
 public class ChispazoDrawPrizeCalculator {
     public PrizeCalculationDrawInfo calculatePrizesForDraw(Long drawId) {

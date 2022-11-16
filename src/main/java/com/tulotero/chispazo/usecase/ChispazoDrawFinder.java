@@ -1,6 +1,6 @@
-package com.tulotero.chispazo.application;
+package com.tulotero.chispazo.usecase;
 
-import com.tulotero.chispazo.domain.ChispazoDraw;
+import com.tulotero.chispazo.domain.bean.ChispazoDraw;
 import com.tulotero.chispazo.domain.ChispazoDrawRepository;
 import lombok.RequiredArgsConstructor;
 

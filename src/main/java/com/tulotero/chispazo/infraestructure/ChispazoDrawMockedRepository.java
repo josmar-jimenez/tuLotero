@@ -1,7 +1,7 @@
 package com.tulotero.chispazo.infraestructure;
 
-import com.tulotero.chispazo.domain.ChispazoDraw;
-import com.tulotero.chispazo.domain.ScrutinyPrize;
+import com.tulotero.chispazo.domain.bean.ChispazoDraw;
+import com.tulotero.chispazo.domain.bean.ScrutinyPrize;
 import com.tulotero.chispazo.domain.ChispazoDrawRepository;
 
 import javax.enterprise.context.ApplicationScoped;

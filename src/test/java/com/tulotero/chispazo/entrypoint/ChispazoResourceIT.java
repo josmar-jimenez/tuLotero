@@ -1,4 +1,4 @@
-package com.tulotero.chispazo.infraestructure;
+package com.tulotero.chispazo.entrypoint;
 
 import io.quarkus.test.junit.QuarkusIntegrationTest;
 import org.junit.jupiter.api.Test;
@@ -10,7 +10,7 @@ import static org.hamcrest.CoreMatchers.is;
 class ChispazoResourceIT {
 
     @Test
-    public void testNextOpenedDrawShouldReturnDraw3() {
+    public void endpointOpenedNext_whenExistsOpenedDraw_shouldReturnDraw() {
         given()
                 .when().get("/rest/chispazo/draws/opened/next")
                 .then()

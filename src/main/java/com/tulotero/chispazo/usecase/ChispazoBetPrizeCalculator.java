@@ -1,7 +1,7 @@
-package com.tulotero.chispazo.application;
+package com.tulotero.chispazo.usecase;
 
-import com.tulotero.chispazo.domain.ChispazoPrizeCheck;
-import com.tulotero.chispazo.domain.PrizeInfo;
+import com.tulotero.chispazo.domain.bean.ChispazoPrizeCheck;
+import com.tulotero.chispazo.domain.bean.PrizeInfo;
 
 import javax.enterprise.context.ApplicationScoped;
 

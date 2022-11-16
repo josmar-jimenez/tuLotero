@@ -1,10 +1,10 @@
-package com.tulotero.chispazo.infraestructure;
+package com.tulotero.chispazo.entrypoint;
 
-import com.tulotero.chispazo.application.ChispazoDrawFinder;
-import com.tulotero.chispazo.application.ChispazoBetPrizeCalculator;
-import com.tulotero.chispazo.domain.ChispazoBet;
-import com.tulotero.chispazo.domain.ChispazoDraw;
-import com.tulotero.chispazo.domain.PrizeInfo;
+import com.tulotero.chispazo.usecase.ChispazoDrawFinder;
+import com.tulotero.chispazo.usecase.ChispazoBetPrizeCalculator;
+import com.tulotero.chispazo.domain.bean.ChispazoBet;
+import com.tulotero.chispazo.domain.bean.ChispazoDraw;
+import com.tulotero.chispazo.domain.bean.PrizeInfo;
 import lombok.RequiredArgsConstructor;
 import org.eclipse.microprofile.openapi.annotations.OpenAPIDefinition;
 import org.eclipse.microprofile.openapi.annotations.Operation;
