@@ -1,5 +1,6 @@
 package com.tulotero.chispazo.entrypoint;
 
+import com.tulotero.chispazo.domain.bean.ChispazoPrizeCheck;
 import com.tulotero.chispazo.usecase.ChispazoDrawFinder;
 import com.tulotero.chispazo.usecase.ChispazoBetPrizeCalculator;
 import com.tulotero.chispazo.domain.bean.ChispazoBet;
@@ -34,8 +35,9 @@ public class ChispazoResource {
     final ChispazoDrawFinder drawFinder;
     final ChispazoBetPrizeCalculator prizeCalculator;
 
-    @Path("/draws/{drawId}")
+
     @GET
+    @Path("/draws/{drawId}")
     @Operation(summary = "Returns information about a Chispazo Draw")
     @APIResponse(
             responseCode = "200",
@@ -54,8 +56,9 @@ public class ChispazoResource {
                 .orElse(createResponseNotFound());
     }
 
-    @Path("/draws/{drawId}/prize")
+
     @POST
+    @Path("/draws/{drawId}/prize")
     @Operation(summary = "Check the prize of a Bet for a draw", description = "The bet and the draw id is sended. The prize is returned")
     @APIResponse(
             responseCode = "200",
@@ -69,13 +72,44 @@ public class ChispazoResource {
             description = "No Chispazo found for the Id passed as argument"
     )
     public Response calculatePrizeInfo(@PathParam("drawId") Long drawId, ChispazoBet bet){
-        throw new UnsupportedOperationException("To be developed following the tests in ChispazoResourceTest");
+        // TODO: It is recommended to do this logic in a service.
+        Optional<ChispazoDraw> chispazoDraw = drawFinder.find(drawId);
+        if(chispazoDraw.isPresent()){
+            ChispazoPrizeCheck chispazoPrizeCheck = new ChispazoPrizeCheck(bet,chispazoDraw.get());
+            return createResponseOk(prizeCalculator.calculatePrize(chispazoPrizeCheck));
+        }else {
+            return createResponseNotFound();
+        }
+    }
+
+    @GET
+    @Path("/draws/opened/next")
+    @Operation(summary = "Get next opened draw", description = "Return next opened draw with future date")
+    @APIResponse(
+            responseCode = "200",
+            description = "Information of next opened draw",
+            content = @Content(
+                    mediaType = "application/json",
+                    schema = @Schema(type = SchemaType.OBJECT, implementation = ChispazoDraw.class))
+    )
+    public Response getOpenedDraw(){
+        // TODO: It is recommended to do this logic in a service.
+        Optional<ChispazoDraw> chispazoDraw = drawFinder.findNext();
+        if(chispazoDraw.isPresent()){
+            return createResponseOk(chispazoDraw.get());
+        }else {
+            return createResponseEmpty();
+        }
     }
 
     private Response createResponseOk(Object entity) {
         return Response.status(Response.Status.OK)
                 .entity(entity)
                 .build();
+    }
+
+    private Response createResponseEmpty() {
+        return Response.status(Response.Status.NO_CONTENT).build();
     }
 
     private Response createResponseNotFound() {

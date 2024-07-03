@@ -88,6 +88,28 @@ class ChispazoResourceTest {
         assertThat(response.getStatus(), is(Response.Status.NOT_FOUND.getStatusCode()));
     }
 
+    @Test
+    public void getOpenedDraw_whenNotExtistingDrawId_shouldResponseCreated() {
+        Long drawId = new Random().nextLong();
+        when(drawFinder.find(drawId)).thenReturn(Optional.empty());
+
+        Response response = resource.getOpenedDraw();
+
+        assertThat(response.getStatus(), is(Response.Status.NO_CONTENT.getStatusCode()));
+    }
+
+    @Test
+    public void getOpenedDraw_whenExtistingDrawId_shouldResponseOK() {
+        Long drawId = new Random().nextLong();
+        ChispazoDraw draw = givenDraw(drawId);
+        when(drawFinder.findNext()).thenReturn(Optional.of(draw));
+
+        Response response = resource.getOpenedDraw();
+
+        assertThat(response.getStatus(), is(Response.Status.OK.getStatusCode()));
+        assertThat(response.getEntity(), is(draw));
+    }
+
     private ChispazoDraw givenDraw(Long drawId){
         return ChispazoDraw.finished(
                 drawId,

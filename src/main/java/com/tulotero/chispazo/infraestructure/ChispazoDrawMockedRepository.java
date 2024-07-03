@@ -49,4 +49,9 @@ public class ChispazoDrawMockedRepository implements ChispazoDrawRepository {
     public List<ChispazoDraw> findAll() {
         return DRAWS;
     }
+
+    @Override
+    public ChispazoDraw findNextOpen() {
+        return DRAWS.stream().filter(ChispazoDraw::isOpened).findFirst().orElse(null);
+    }
 }

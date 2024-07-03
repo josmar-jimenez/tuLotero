@@ -18,4 +18,8 @@ public class ChispazoDrawFinder {
                 .filter(draw -> draw.getDrawId() == drawId)
                 .findAny();
     }
+
+    public Optional<ChispazoDraw> findNext(){
+        return Optional.ofNullable(chispazoDrawRepository.findNextOpen());
+    }
 }

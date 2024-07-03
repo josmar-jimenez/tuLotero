@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface ChispazoDrawRepository {
     List<ChispazoDraw> findAll();
+    ChispazoDraw findNextOpen();
 }

@@ -1,5 +1,6 @@
 package com.tulotero.chispazo.domain.bean;
 
+import lombok.Builder;
 import lombok.Value;
 
 import java.util.Collections;
